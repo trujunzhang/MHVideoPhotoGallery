@@ -68,18 +68,10 @@
                                                  galleryType:MHGalleryTypeVideo];
 
     MHGalleryItem *landschaft = [[MHGalleryItem alloc] initWithImage:[UIImage imageNamed:@"rest01.jpg"]];
+    MHGalleryItem *landschaft1 = [[MHGalleryItem alloc] initWithImage:[UIImage imageNamed:@"rest02.jpeg"]];
+    MHGalleryItem *landschaft2 = [[MHGalleryItem alloc] initWithImage:[UIImage imageNamed:@"rest03.jpeg"]];
+    MHGalleryItem *landschaft3 = [[MHGalleryItem alloc] initWithImage:[UIImage imageNamed:@"rest04.jpeg"]];
 
-//    MHGalleryItem *landschaft = [MHGalleryItem.alloc initWithURL:@"http://alles-bilder.de/landschaften/HD%20Landschaftsbilder%20(47).jpg"
-//                                                     galleryType:MHGalleryTypeImage];
-
-    MHGalleryItem *landschaft1 = [MHGalleryItem.alloc initWithURL:@"http://de.flash-screen.com/free-wallpaper/bezaubernde-landschaftsabbildung-hd/hd-bezaubernde-landschaftsder-tapete,1920x1200,56420.jpg"
-                                                      galleryType:MHGalleryTypeImage];
-
-    MHGalleryItem *landschaft2 = [MHGalleryItem.alloc initWithURL:@"http://alles-bilder.de/landschaften/HD%20Landschaftsbilder%20(64).jpg"
-                                                      galleryType:MHGalleryTypeImage];
-
-    MHGalleryItem *landschaft3 = [MHGalleryItem.alloc initWithURL:@"http://www.dirks-computerseite.de/wp-content/uploads/2013/06/purpleworld1.jpg"
-                                                      galleryType:MHGalleryTypeImage];
 
     MHGalleryItem *landschaft4 = [MHGalleryItem.alloc initWithURL:@"http://alles-bilder.de/landschaften/HD%20Landschaftsbilder%20(42).jpg"
                                                       galleryType:MHGalleryTypeImage];
@@ -135,8 +127,7 @@
     landschaft10.attributedString = string;
 
     self.galleryDataSource = @[
-            @[landschaft],
-//            @[landschaft, landschaft1, landschaft2, landschaft3, landschaft4, landschaft5, landschaft6, landschaft7, landschaft8, landschaft9, landschaft10, landschaft11, landschaft12, landschaft13, landschaft14, landschaft15, landschaft16, landschaft17, landschaft18, landschaft19, landschaft20],
+            @[landschaft,landschaft1,landschaft2,landschaft3],
             @[vimeo3, youtube, vimeo0, vimeo1, landschaft9, landschaft6, landschaft5, landschaft4, landschaft3, landschaft2, landschaft, landschaft1],
             @[landschaft9, landschaft6, localVideo, landschaft5, landschaft4, landschaft3, landschaft2, landschaft, landschaft1]
             ];
