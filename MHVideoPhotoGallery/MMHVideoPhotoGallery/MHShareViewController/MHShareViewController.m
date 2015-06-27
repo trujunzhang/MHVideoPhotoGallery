@@ -9,12 +9,10 @@
 #import "MHShareViewController.h"
 #import "MHMediaPreviewCollectionViewCell.h"
 #import "MHGallery.h"
-#import "UIImageView+WebCache.h"
 #import "MHTransitionShowShareView.h"
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import "MHGallerySharedManagerPrivate.h"
-#import "SDImageCache.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "MHGallery.h"
 
@@ -640,9 +638,9 @@
             if ([dataURL.image isKindOfClass:UIImage.class]) {
                 UIImage *image = dataURL.image;
                 if (image.images) {
-                    [picker addAttachmentData:[NSData dataWithContentsOfFile:[SDImageCache.sharedImageCache defaultCachePathForKey:dataURL.URL]]
-                               typeIdentifier:(__bridge NSString *)kUTTypeGIF
-                                     filename:@"animated.gif"];
+//                    [picker addAttachmentData:[NSData dataWithContentsOfFile:[SDImageCache.sharedImageCache defaultCachePathForKey:dataURL.URL]]
+//                               typeIdentifier:(__bridge NSString *)kUTTypeGIF
+//                                     filename:@"animated.gif"];
                 }else{
                     [picker addAttachmentData:UIImageJPEGRepresentation(dataURL.image, 1.0)
                                typeIdentifier:@"public.image"
@@ -671,9 +669,9 @@
             if ([dataURL.image isKindOfClass:UIImage.class]) {
                 UIImage *image = dataURL.image;
                 if (image.images) {
-                    [picker addAttachmentData:[NSData dataWithContentsOfFile:[[SDImageCache sharedImageCache] defaultCachePathForKey:dataURL.URL]]
-                                     mimeType:@"image/gif"
-                                     fileName:@"pic.gif"];
+//                    [picker addAttachmentData:[NSData dataWithContentsOfFile:[[SDImageCache sharedImageCache] defaultCachePathForKey:dataURL.URL]]
+//                                     mimeType:@"image/gif"
+//                                     fileName:@"pic.gif"];
                 }else{
                     [picker addAttachmentData:UIImageJPEGRepresentation(dataURL.image, 1.0)
                                      mimeType:@"image/jpeg"
@@ -794,65 +792,29 @@
     for (NSIndexPath *indexPath in self.selectedRows) {
         MHGalleryItem *item = [self itemForIndex:indexPath.row];
         
-        if (item.galleryType == MHGalleryTypeVideo) {
-            if (!saveToCameraRoll) {
-                MHImageURL *imageURL = [MHImageURL.alloc initWithURL:item.URLString image:nil];
-                [weakSelf addDataToDownloadArray:imageURL];
-            }else{
-                [MHGallerySharedManager.sharedManager getURLForMediaPlayer:item.URLString successBlock:^(NSURL *URL, NSError *error) {
-                    NSURLSession *session = [NSURLSession sessionWithConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration];
-                    
-                    [self.sessions addObject:session];
-                    [[session downloadTaskWithURL:URL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                        if (error){
-                            weakSelf.saveCounter++;
-                            return;
-                        }
-                        NSURL *documentsURL = [[NSFileManager.defaultManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-                        NSURL *tempURL = [documentsURL URLByAppendingPathComponent:@"storeForShare.mp4"];
-                        
-                        NSError *moveItemError = nil;
-                        [NSFileManager.defaultManager moveItemAtURL:location toURL:tempURL error:&moveItemError];
-                        
-                        if (moveItemError) {
-                            weakSelf.saveCounter++;
-                            return;
-                        }
-                        ALAssetsLibrary* library = ALAssetsLibrary.new;
-                        [library writeVideoAtPathToSavedPhotosAlbum:tempURL
-                                                    completionBlock:^(NSURL *assetURL, NSError *error){
-                                                        NSError *removeError =nil;
-                                                        [NSFileManager.defaultManager removeItemAtURL:tempURL error:&removeError];
-                                                        
-                                                        [weakSelf.sessions removeObject:session];
-                                                        weakSelf.saveCounter++;
-                                                    }];
-                    }] resume];
-                }];
-            }
-            
-        }
+
         
         if (item.galleryType == MHGalleryTypeImage) {
             
-            if ([item.URLString rangeOfString:MHAssetLibrary].location != NSNotFound && item.URLString) {
-                [MHGallerySharedManager.sharedManager getImageFromAssetLibrary:item.URLString
-                                                                     assetType:MHAssetImageTypeFull
-                                                                  successBlock:^(UIImage *image, NSError *error) {
-                                                                      MHImageURL *imageURL = [MHImageURL.alloc initWithURL:item.URLString
-                                                                                                                     image:image];
-                                                                      [weakSelf addDataToDownloadArray:imageURL];
-                                                                  }];
-            }else if (item.image) {
+//            if ([item.URLString rangeOfString:MHAssetLibrary].location != NSNotFound && item.URLString) {
+//                [MHGallerySharedManager.sharedManager getImageFromAssetLibrary:item.URLString
+//                                                                     assetType:MHAssetImageTypeFull
+//                                                                  successBlock:^(UIImage *image, NSError *error) {
+//                                                                      MHImageURL *imageURL = [MHImageURL.alloc initWithURL:item.URLString
+//                                                                                                                     image:image];
+//                                                                      [weakSelf addDataToDownloadArray:imageURL];
+//                                                                  }];
+//            }else
+            if (item.image) {
                 [self addDataToDownloadArray:item.image];
             }else{
                 
-                [SDWebImageManager.sharedManager downloadImageWithURL:[NSURL URLWithString:item.URLString] options:SDWebImageContinueInBackground progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                    
-                    MHImageURL *imageURLMH = [MHImageURL.alloc initWithURL:item.URLString
-                                                                     image:image];
-                    [weakSelf addDataToDownloadArray:imageURLMH];
-                }];
+//                [SDWebImageManager.sharedManager downloadImageWithURL:[NSURL URLWithString:item.URLString] options:SDWebImageContinueInBackground progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//
+//                    MHImageURL *imageURLMH = [MHImageURL.alloc initWithURL:item.URLString
+//                                                                     image:image];
+//                    [weakSelf addDataToDownloadArray:imageURLMH];
+//                }];
             }
         }
     }
@@ -942,7 +904,7 @@
                 NSData *data;
                 
                 if (imageToStore.images) {
-                    data = [NSData dataWithContentsOfFile:[[SDImageCache sharedImageCache] defaultCachePathForKey:dataURL.URL]];
+//                    data = [NSData dataWithContentsOfFile:[[SDImageCache sharedImageCache] defaultCachePathForKey:dataURL.URL]];
                 }else{
                     data = UIImageJPEGRepresentation(imageToStore, 1.0);
                 }

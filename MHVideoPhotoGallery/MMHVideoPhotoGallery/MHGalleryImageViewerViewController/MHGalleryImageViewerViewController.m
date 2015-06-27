@@ -24,6 +24,8 @@
 
 @implementation MHGalleryImageViewerViewController
 
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -88,7 +90,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    
+
     self.UICustomization          = self.galleryViewController.UICustomization;
     self.transitionCustomization  = self.galleryViewController.transitionCustomization;
     
@@ -877,18 +879,6 @@
                 [weakSelf.act stopAnimating];
             }];
             
-        }else{
-            [MHGallerySharedManager.sharedManager startDownloadingThumbImage:self.item.URLString
-                                                                successBlock:^(UIImage *image,NSUInteger videoDuration,NSError *error) {
-                                                                    if (!error) {
-                                                                        [weakSelf handleGeneratedThumb:image
-                                                                                         videoDuration:videoDuration
-                                                                                             urlString:self.item.URLString];
-                                                                    }else{
-                                                                        [weakSelf changeToErrorImage];
-                                                                    }
-                                                                    [weakSelf.act stopAnimating];
-                                                                }];
         }
     }
     
@@ -917,23 +907,8 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    __weak typeof(self) weakSelf = self;
-    
-    if (self.item.galleryType == MHGalleryTypeVideo) {
-        if (self.moviePlayer) {
-            [weakSelf autoPlayVideo];
-            return;
-        }
-        [[MHGallerySharedManager sharedManager] getURLForMediaPlayer:self.item.URLString successBlock:^(NSURL *URL, NSError *error) {
-            if (error || URL == nil) {
-                [weakSelf changePlayButtonToUnPlay];
-            }else{
-                [weakSelf addMoviePlayerToViewWithURL:URL];
-                [weakSelf autoPlayVideo];
-            }
-        }];
-    }
-    
+//    __weak typeof(self) weakSelf = self;
+
 }
 
 -(void)autoPlayVideo{
@@ -1331,34 +1306,6 @@
             }
         }
         self.act.color = [UIColor blackColor];
-    }
-    if (self.item.galleryType == MHGalleryTypeVideo) {
-        
-        if (self.moviePlayer) {
-            [self.slider setValue:self.moviePlayer.currentPlaybackTime animated:NO];
-        }
-        
-        if (self.imageView.image) {
-            self.playButton.frame = CGRectMake(self.viewController.view.frame.size.width/2-36, self.viewController.view.frame.size.height/2-36, 72, 72);
-        }
-        self.leftSliderLabel.frame = CGRectMake(8, 0, 40, 43);
-        self.rightSliderLabel.frame =CGRectMake(self.viewController.view.bounds.size.width-50, 0, 50, 43);
-        
-        if(UIApplication.sharedApplication.statusBarOrientation != UIInterfaceOrientationPortrait){
-            if (self.view.bounds.size.width < self.view.bounds.size.height) {
-                self.rightSliderLabel.frame =CGRectMake(self.view.bounds.size.height-50, 0, 50, 43);
-                if (self.imageView.image) {
-                    self.playButton.frame = CGRectMake(self.view.bounds.size.height/2-36, self.view.bounds.size.width/2-36, 72, 72);
-                }
-            }
-        }
-        self.moviePlayerToolBarTop.frame =CGRectMake(0,44+([UIApplication sharedApplication].statusBarHidden?0:20), self.view.frame.size.width, 44);
-        if (!MHISIPAD) {
-            if (UIApplication.sharedApplication.statusBarOrientation != UIInterfaceOrientationPortrait) {
-                self.moviePlayerToolBarTop.frame =CGRectMake(0,32+([UIApplication sharedApplication].statusBarHidden?0:20), self.view.frame.size.width, 44);
-            }
-        }
-        
     }
 }
 

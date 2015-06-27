@@ -250,26 +250,27 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     
     MHMediaPreviewCollectionViewCell *cell = (MHMediaPreviewCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
     MHGalleryItem *item =  [self itemForIndex:indexPath.row];
-    
-    UIImage *thumbImage = [SDImageCache.sharedImageCache imageFromDiskCacheForKey:item.URLString];
-    if (thumbImage) {
-        cell.thumbnail.image = thumbImage;
-    }
-    if ([item.URLString rangeOfString:MHAssetLibrary].location != NSNotFound && item.URLString) {
-        
-        [MHGallerySharedManager.sharedManager getImageFromAssetLibrary:item.URLString
-                                                             assetType:MHAssetImageTypeFull
-                                                          successBlock:^(UIImage *image, NSError *error) {
-                                                              cell.thumbnail.image = image;
-                                                              [weakSelf pushToImageViewerForIndexPath:indexPath];
-                                                          }];
-    }else{
-        [self pushToImageViewerForIndexPath:indexPath];
-    }
+
+    // TODO djzhang(used)
+//    UIImage *thumbImage = [SDImageCache.sharedImageCache imageFromDiskCacheForKey:item.URLString];
+//    if (thumbImage) {
+//        cell.thumbnail.image = thumbImage;
+//    }
+//    if ([item.URLString rangeOfString:MHAssetLibrary].location != NSNotFound && item.URLString) {
+//
+//        [MHGallerySharedManager.sharedManager getImageFromAssetLibrary:item.URLString
+//                                                             assetType:MHAssetImageTypeFull
+//                                                          successBlock:^(UIImage *image, NSError *error) {
+//                                                              cell.thumbnail.image = image;
+//                                                              [weakSelf pushToImageViewerForIndexPath:indexPath];
+//                                                          }];
+//    }else{
+//        [self pushToImageViewerForIndexPath:indexPath];
+//    }
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -288,13 +289,14 @@
 
 -(void)getImageForItem:(MHGalleryItem*)item
         finishCallback:(void(^)(UIImage *image))FinishBlock{
-    
-    [SDWebImageManager.sharedManager downloadImageWithURL:[NSURL URLWithString:item.URLString]
-                                                  options:SDWebImageContinueInBackground
-                                                 progress:nil
-                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                                    FinishBlock(image);
-                                                }];
+
+    // TODO djzhang(test)
+//    [SDWebImageManager.sharedManager downloadImageWithURL:[NSURL URLWithString:item.URLString]
+//                                                  options:SDWebImageContinueInBackground
+//                                                 progress:nil
+//                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//                                                    FinishBlock(image);
+//                                                }];
 }
 -(void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -311,8 +313,9 @@
             if (image) {
                 UIPasteboard *pasteboard = UIPasteboard.generalPasteboard;
                 if (image.images) {
-                    NSData *data = [NSData dataWithContentsOfFile:[SDImageCache.sharedImageCache defaultCachePathForKey:item.URLString]];
-                    [pasteboard setData:data forPasteboardType:(__bridge NSString *)kUTTypeGIF];
+                    // TODO djzhang(used)
+//                    NSData *data = [NSData dataWithContentsOfFile:[SDImageCache.sharedImageCache defaultCachePathForKey:item.URLString]];
+//                    [pasteboard setData:data forPasteboardType:(__bridge NSString *)kUTTypeGIF];
                 }else{
                     NSData *data = UIImagePNGRepresentation(image);
                     [pasteboard setData:data forPasteboardType:(__bridge NSString *)kUTTypeImage];

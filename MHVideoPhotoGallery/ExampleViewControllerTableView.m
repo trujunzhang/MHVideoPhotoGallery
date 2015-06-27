@@ -8,7 +8,6 @@
 
 #import "ExampleViewControllerTableView.h"
 #import "MHOverviewController.h"
-#import "UIImageView+WebCache.h"
 
 @implementation ImageTableViewCell
 
@@ -86,12 +85,7 @@
     }
     MHGalleryItem *item = self.galleryDataSource[indexPath.row];
     if(item.galleryType == MHGalleryTypeImage){
-        [cell.iv sd_setImageWithURL:[NSURL URLWithString:item.URLString]];
-    }else{
-        [[MHGallerySharedManager sharedManager] startDownloadingThumbImage:item.URLString
-                                                              successBlock:^(UIImage *image, NSUInteger videoDuration, NSError *error) {
-                                                                  cell.iv.image = image;
-                                                              }];
+//        [cell.iv sd_setImageWithURL:[NSURL URLWithString:item.URLString]];
     }
     
     cell.labelText.text = item.descriptionString;

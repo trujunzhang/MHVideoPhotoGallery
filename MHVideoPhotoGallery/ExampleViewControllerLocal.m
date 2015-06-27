@@ -81,12 +81,13 @@
     MHGallerySectionItem *section = self.allData[indexPath.row];
     
     MHGalleryItem *item = [section.galleryItems firstObject];
-    
-    [[MHGallerySharedManager sharedManager] getImageFromAssetLibrary:item.URLString
-                                                           assetType:MHAssetImageTypeThumb
-                                                        successBlock:^(UIImage *image, NSError *error) {
-        cell.iv.image = image;
-    }];
+
+    // TODO djzhang(used)
+//    [[MHGallerySharedManager sharedManager] getImageFromAssetLibrary:item.URLString
+//                                                           assetType:MHAssetImageTypeThumb
+//                                                        successBlock:^(UIImage *image, NSError *error) {
+//        cell.iv.image = image;
+//    }];
     
     cell.labelText.text = section.sectionName;
     return cell;
