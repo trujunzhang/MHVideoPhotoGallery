@@ -11,6 +11,8 @@
 
 @property(nonatomic, strong) NSArray *cellDataSource;
 
-- (void)configureCell:(NSInteger)section withCellDataSource:(NSArray*)cellDataSource;
+@property(nonatomic, strong) UIViewController *viewController;
+
+- (void)configureCell:(NSInteger)section withCellDataSource:(NSArray *)cellDataSource forViewController:(UIViewController *)viewController;
 @end
 

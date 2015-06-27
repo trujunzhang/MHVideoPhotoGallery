@@ -13,9 +13,10 @@
     
 }
 
-- (void)configureCell:(NSInteger)section withCellDataSource:(NSArray*)cellDataSource {
+- (void)configureCell:(NSInteger)section withCellDataSource:(NSArray *)cellDataSource forViewController:(UIViewController *)viewController {
     
     self.cellDataSource = cellDataSource;
+    self.viewController = viewController;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(0, 25, 0, 25);
@@ -55,7 +56,8 @@
 
     UIImageView *imageView = [(MHMediaPreviewCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath] thumbnail];
 
-    NSArray *galleryData = self.galleryDataSource[collectionView.tag];
+    NSArray *galleryData = self.cellDataSource; 
+//            self.galleryDataSource[collectionView.tag];
 
     MHGalleryController *gallery = [MHGalleryController galleryWithPresentationStyle:MHGalleryViewModeImageViewerNavigationBarShown];
     gallery.galleryItems = galleryData;
@@ -69,7 +71,7 @@
     gallery.finishedCallback = ^(NSInteger currentIndex, UIImage *image, MHTransitionDismissMHGallery *interactiveTransition, MHGalleryViewMode viewMode) {
         if (viewMode == MHGalleryViewModeOverView) {
             [blockGallery dismissViewControllerAnimated:YES completion:^{
-                [self setNeedsStatusBarAppearanceUpdate];
+                [self.viewController setNeedsStatusBarAppearanceUpdate];
             }];
         } else {
             NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndex inSection:0];
@@ -85,7 +87,7 @@
 
                 [blockGallery dismissViewControllerAnimated:YES dismissImageView:cell.thumbnail completion:^{
 
-                    [self setNeedsStatusBarAppearanceUpdate];
+                    [self.viewController setNeedsStatusBarAppearanceUpdate];
 
                     MPMoviePlayerController *player = interactiveTransition.moviePlayer;
 
@@ -97,12 +99,14 @@
             });
         }
     };
-    [self presentMHGalleryController:gallery animated:YES completion:nil];
+    [self.viewController presentMHGalleryController:gallery animated:YES completion:nil];
 }
 
 
 - (void)makeOverViewDetailCell:(MHMediaPreviewCollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    MHGalleryItem *item = self.galleryDataSource[indexPath.section][indexPath.row];
+//    MHGalleryItem *item = self.galleryDataSource[indexPath.section][indexPath.row];
+    MHGalleryItem *item = self.cellDataSource[indexPath.row];
+    
     cell.thumbnail.contentMode = UIViewContentModeScaleAspectFill;
 
     cell.thumbnail.layer.shadowOffset = CGSizeMake(0, 0);
@@ -119,16 +123,12 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.galleryDataSource[collectionView.tag] count];
+//    return [self.galleryDataSource[collectionView.tag] count];
+    return [self.cellDataSource count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
-}
-
--(NSArray *)getCellGallaryDataSource{
-    
-    return @[@""];
 }
 
 @end

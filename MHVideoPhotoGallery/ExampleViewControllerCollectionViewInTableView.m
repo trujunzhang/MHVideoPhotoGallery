@@ -180,7 +180,7 @@
     cell.backView.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.backView.bounds].CGPath;
     cell.backView.layer.cornerRadius = 2.0;
 
-    [cell configureCell:indexPath.section withCellDataSource:self.galleryDataSource[indexPath.section]];
+    [cell configureCell:indexPath.section withCellDataSource:self.galleryDataSource[indexPath.section] forViewController:nil];
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
