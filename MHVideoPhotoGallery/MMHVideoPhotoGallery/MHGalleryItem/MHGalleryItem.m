@@ -16,7 +16,7 @@
         return nil;
     self.galleryType = MHGalleryTypeImage;
     self.image = image;
-    self.descriptionString = @"wanghao";
+//    self.descriptionString = @"wanghao";
     return self;
 }
 
