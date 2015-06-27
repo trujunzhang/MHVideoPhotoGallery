@@ -4,6 +4,7 @@
 //
 
 
+#import "MHGallery.h"
 
 @interface TestCell : UITableViewCell<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;

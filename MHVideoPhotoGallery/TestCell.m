@@ -99,6 +99,7 @@
             });
         }
     };
+
     [self.viewController presentMHGalleryController:gallery animated:YES completion:nil];
 }
 
