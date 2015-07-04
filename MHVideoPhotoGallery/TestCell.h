@@ -10,7 +10,9 @@
 
 @property(nonatomic, strong) NSArray *collectionData;
 
-- (void)configureCell:(NSInteger)section source:(id)source;
+@property(nonatomic, strong) UIViewController *viewController;
+
+- (void)configureCell:(NSInteger)section source:(id)source forViewController:(UIViewController *)controller;
 @end
 
 

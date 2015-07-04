@@ -174,7 +174,7 @@
     if (!cell) {
         cell = [[TestCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    [cell configureCell:indexPath.section source: self.galleryDataSource[indexPath.section]];
+    [cell configureCell:indexPath.section source: self.galleryDataSource[indexPath.section] forViewController:self];
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

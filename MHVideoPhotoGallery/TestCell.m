@@ -9,8 +9,10 @@
 @implementation TestCell
 
 
-- (void)configureCell:(NSInteger)section source:(NSArray*)source {
+- (void)configureCell:(NSInteger)section source:(id)source forViewController:(UIViewController *)controller {
     self.collectionData = source;
+    self.viewController = controller;
+    
     [self setupEffect];
     
     [self configureCollection:section];
@@ -106,7 +108,8 @@
             });
         }
     };
-//    [self presentMHGalleryController:gallery animated:YES completion:nil];
+
+    [self.viewController presentMHGalleryController:gallery animated:YES completion:nil];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
