@@ -27,6 +27,7 @@
 		5E8FB78F1B3E3FAA00D5CC8C /* waiter01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5E8FB77B1B3E3FA900D5CC8C /* waiter01.jpeg */; };
 		5E8FB7901B3E3FAA00D5CC8C /* waiter02.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5E8FB77C1B3E3FA900D5CC8C /* waiter02.jpeg */; };
 		5E8FB7911B3E3FAA00D5CC8C /* waiter03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E8FB77D1B3E3FA900D5CC8C /* waiter03.jpg */; };
+		65B8CACF5C0AE533B35BDC7D /* TestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B8C647900FC1538A33D123 /* TestCell.m */; };
 		F514263518911D8E0091E3DF /* 707-albums-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F514263318911D8E0091E3DF /* 707-albums-selected.png */; };
 		F514263618911D8E0091E3DF /* 707-albums-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F514263418911D8E0091E3DF /* 707-albums-selected@2x.png */; };
 		F514263918911D920091E3DF /* 705-photos-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F514263718911D920091E3DF /* 705-photos-selected.png */; };
@@ -143,6 +144,8 @@
 		5E8FB77B1B3E3FA900D5CC8C /* waiter01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = waiter01.jpeg; sourceTree = "<group>"; };
 		5E8FB77C1B3E3FA900D5CC8C /* waiter02.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = waiter02.jpeg; sourceTree = "<group>"; };
 		5E8FB77D1B3E3FA900D5CC8C /* waiter03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = waiter03.jpg; sourceTree = "<group>"; };
+		65B8C2C81DD774C6C1AC921A /* TestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCell.h; sourceTree = "<group>"; };
+		65B8C647900FC1538A33D123 /* TestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCell.m; sourceTree = "<group>"; };
 		F514263318911D8E0091E3DF /* 707-albums-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "707-albums-selected.png"; sourceTree = "<group>"; };
 		F514263418911D8E0091E3DF /* 707-albums-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "707-albums-selected@2x.png"; sourceTree = "<group>"; };
 		F514263718911D920091E3DF /* 705-photos-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "705-photos-selected.png"; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 				5E8FB7691B3E3FA900D5CC8C /* Resources */,
 				F53F925B17EB008100A9FE6A /* Images.xcassets */,
 				F53F924A17EB008100A9FE6A /* Supporting Files */,
+				65B8C2C81DD774C6C1AC921A /* TestCell.h */,
+				65B8C647900FC1538A33D123 /* TestCell.m */,
 			);
 			path = MHVideoPhotoGallery;
 			sourceTree = "<group>";
@@ -794,6 +799,7 @@
 				F5B2EC8017F9D68C000ADC51 /* ExampleViewControllerCollectionViewInTableView.m in Sources */,
 				F543E50B18EAB396008D7590 /* MHGalleryController.m in Sources */,
 				F58F65051880899200D3A8F9 /* MHShareViewController.m in Sources */,
+				65B8CACF5C0AE533B35BDC7D /* TestCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

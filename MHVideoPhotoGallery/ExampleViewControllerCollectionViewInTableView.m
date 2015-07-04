@@ -8,6 +8,7 @@
 
 #import "ExampleViewControllerCollectionViewInTableView.h"
 #import "MHOverviewController.h"
+#include "TestCell.h"
 
 @implementation UITabBarController (autoRotate)
 - (BOOL)shouldAutorotate {
@@ -38,9 +39,6 @@
 
 @end
 
-
-@implementation TestCell
-@end
 
 @interface ExampleViewControllerCollectionViewInTableView ()
 @property(nonatomic, strong) NSArray *galleryDataSource;
@@ -181,13 +179,9 @@
     if (!cell) {
         cell = [[TestCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.backView.layer.masksToBounds = NO;
-    cell.backView.layer.shadowOffset = CGSizeMake(0, 0);
-    cell.backView.layer.shadowRadius = 1.0;
-    cell.backView.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.backView.layer.shadowOpacity = 0.5;
-    cell.backView.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.backView.bounds].CGPath;
-    cell.backView.layer.cornerRadius = 2.0;
+    [cell configureCell];
+
+
 
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(0, 25, 0, 25);
