@@ -54,7 +54,7 @@
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     NSIndexPath *indexPathNew = [NSIndexPath indexPathForRow:indexPath.row inSection:collectionView.tag];
 
-//    [self makeOverViewDetailCell:(MHMediaPreviewCollectionViewCell *) cell atIndexPath:indexPathNew];
+    [self makeOverViewDetailCell:(MHMediaPreviewCollectionViewCell *) cell atIndexPath:indexPathNew];
 
     return cell;
 }
