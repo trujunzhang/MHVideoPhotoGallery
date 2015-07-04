@@ -4,11 +4,13 @@
 //
 
 
-@interface TestCell : UITableViewCell
+@interface TestCell : UITableViewCell<UICollectionViewDataSource,UICollectionViewDelegate,MHGalleryDataSource,MHGalleryDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UIView *backView;
 
-- (void)configureCell;
+@property(nonatomic, strong) NSArray *collectionData;
+
+- (void)configureCell:(NSInteger)section source:(id)source;
 @end
 
 
